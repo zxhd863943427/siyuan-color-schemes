@@ -24,7 +24,7 @@ class ColorSchemePlugin extends Plugin {
                         <div class="b3-label__text">切换当前的文字配色方案</div>
                     </div> 
                     <span class="fn__space"></span>
-                    <select class="b3-select fn__flex-center fn__size200" id="current">
+                    <select class="b3-select fn__flex-center fn__size200" id="color-schemes-current">
                         ${options.map((o) => `<option value="${o}">${this.config.colorSchemes[o]}</option>`).join('\n')}
                     </select>
                 </label>
@@ -34,30 +34,30 @@ class ColorSchemePlugin extends Plugin {
                         <div class="b3-label__text">导入社区提供的配色方案</div>
                     </div>
                     <span class="fn__space"></span>
-                    <button class="b3-button b3-button--outline fn__flex-center fn__size200" id="upload-button">
+                    <button class="b3-button b3-button--outline fn__flex-center fn__size200" id="color-schemes-upload-button">
                         点击上传
-                        <input class="b3-file fn__flex-center" type="file" id="file" style="display:none"/>
+                        <input class="b3-file fn__flex-center" type="file" id="color-schemes-file" style="display:none"/>
                         </button>
                 </label>
             </div>
             `;
-            const uploadButton = el.querySelector('#upload-button');
+            const uploadButton = el.querySelector('#color-schemes-upload-button');
             
-            const select = el.querySelector('#current');
+            const select = el.querySelector('#color-schemes-current');
             select.value = this.config.current;
             select.addEventListener('change', (e) => {
                 const selected = e.target.value;
                 this.applyScheme(selected);
             });
-            const file = el.querySelector('#file');
+            const file = el.querySelector('#color-schemes-file');
             uploadButton.addEventListener('click', () => {
                 file.click();
             });
             file.addEventListener('change', async (e) => {
-                const file = el.querySelector('#file').files[0];
+                const file = el.querySelector('#color-schemes-file').files[0];
                 await this.upload(file);
                 file.value = '';
-                const select = el.querySelector('#current');
+                const select = el.querySelector('#color-schemes-current');
                 const options = Object.keys(this.config.colorSchemes);
                 const newOptionsHTML = options.map((o) => `<option value="${o}">${this.config.colorSchemes[o]}</option>`).join('\n');
                 select.innerHTML = newOptionsHTML;
