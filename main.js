@@ -10,6 +10,242 @@ const defaultConfig = {
 
 class ColorSchemePlugin extends Plugin {
     config = defaultConfig;
+    snippetCSS = `
+/* 请使用在线工具获取颜色HEX色值 */
+
+
+/* 此段代码为所有在思源中设置了字色的文字设置共同的属性 */
+[style*="color: var(--b3-font-color"] {
+font-weight: 500;
+/* 略微调高字重 */
+font-size: 1em;
+/* 如果你想让标注了的文字的字号有变化的话，可以修改数值 */
+opacity: 100% !important;
+/* 不透明度 */
+vertical-align: inherit;
+text-shadow: none !important;
+/* 无文字阴影！ */
+}
+
+
+[style*="var(--b3-font-color1);"] {
+color: var(--diy-color1) !important;
+}
+
+[style*="var(--b3-font-color2);"] {
+color: var(--diy-color2) !important;
+}
+
+[style*="var(--b3-font-color3);"] {
+color: var(--diy-color3) !important;
+}
+
+[style*="var(--b3-font-color4);"] {
+color: var(--diy-color4) !important;
+}
+
+[style*="var(--b3-font-color5);"] {
+color: var(--diy-color5) !important;
+}
+
+[style*="var(--b3-font-color6);"] {
+color: var(--diy-color6) !important;
+}
+
+[style*="var(--b3-font-color7);"] {
+color: var(--diy-color7) !important;
+}
+
+[style*="var(--b3-font-color8);"] {
+color: var(--diy-color8) !important;
+}
+
+[style*="var(--b3-font-color9);"] {
+color: var(--diy-color9) !important;
+}
+
+[style*="var(--b3-font-color10);"] {
+color: var(--diy-color10) !important;
+}
+
+[style*="var(--b3-font-color11);"] {
+color: var(--diy-color11) !important;
+}
+
+[style*="var(--b3-font-color12);"] {
+color: var(--diy-color12) !important;
+}
+
+[style*="var(--b3-font-color13);"] {
+color: var(--diy-color13) !important;
+}
+
+
+/* 修改字色菜单中的图标颜色 */
+/* 不显示那个A字 */
+.color__square[style*="color:var(--b3-font-color"] {
+color: transparent !important;
+}
+
+.color__square[style*="color:var(--b3-font-color1)"] {
+background-color: var(--diy-color1) !important;
+}
+
+.color__square[style*="color:var(--b3-font-color2)"] {
+background-color: var(--diy-color2) !important;
+}
+
+.color__square[style*="color:var(--b3-font-color3)"] {
+background-color: var(--diy-color3) !important;
+}
+
+.color__square[style*="color:var(--b3-font-color4)"] {
+background-color: var(--diy-color4) !important;
+}
+
+.color__square[style*="color:var(--b3-font-color5)"] {
+background-color: var(--diy-color5) !important;
+}
+
+.color__square[style*="color:var(--b3-font-color6)"] {
+background-color: var(--diy-color6) !important;
+}
+
+.color__square[style*="color:var(--b3-font-color7)"] {
+background-color: var(--diy-color7) !important;
+}
+
+.color__square[style*="color:var(--b3-font-color8)"] {
+background-color: var(--diy-color8) !important;
+}
+
+.color__square[style*="color:var(--b3-font-color9)"] {
+background-color: var(--diy-color9) !important;
+}
+
+.color__square[style*="color:var(--b3-font-color10)"] {
+background-color: var(--diy-color10) !important;
+}
+
+.color__square[style*="color:var(--b3-font-color11)"] {
+background-color: var(--diy-color11) !important;
+}
+
+.color__square[style*="color:var(--b3-font-color12)"] {
+background-color: var(--diy-color12) !important;
+}
+
+.color__square[style*="color:var(--b3-font-color13)"] {
+background-color: var(--diy-color13) !important;
+}
+
+
+
+/* 针对不同底色，修改其底色 */
+[style*="background-color: var(--b3-font-background1);"] {
+background-color: var(--diy-bg-color1) !important;
+}
+
+[style*="background-color: var(--b3-font-background2);"] {
+background-color: var(--diy-bg-color2) !important;
+}
+
+[style*="background-color: var(--b3-font-background3);"] {
+background-color: var(--diy-bg-color3) !important;
+}
+
+[style*="background-color: var(--b3-font-background4);"] {
+background-color: var(--diy-bg-color4) !important;
+}
+
+[style*="background-color: var(--b3-font-background5);"] {
+background-color: var(--diy-bg-color5) !important;
+}
+
+[style*="background-color: var(--b3-font-background6);"] {
+background-color: var(--diy-bg-color6) !important;
+}
+
+[style*="background-color: var(--b3-font-background7);"] {
+background-color: var(--diy-bg-color7) !important;
+}
+
+[style*="background-color: var(--b3-font-background8);"] {
+background-color: var(--diy-bg-color8) !important;
+}
+
+[style*="background-color: var(--b3-font-background9);"] {
+background-color: var(--diy-bg-color9) !important;
+}
+
+[style*="background-color: var(--b3-font-background10);"] {
+background-color: var(--diy-bg-color10) !important;
+}
+
+[style*="background-color: var(--b3-font-background11);"] {
+background-color: var(--diy-bg-color11) !important;
+}
+
+[style*="background-color: var(--b3-font-background12);"] {
+background-color: var(--diy-bg-color12) !important;
+}
+
+[style*="background-color: var(--b3-font-background13);"] {
+background-color: var(--diy-bg-color13) !important;
+
+}
+
+
+.color__square[style*="background-color:var(--b3-font-background1)"] {
+background-color: var(--diy-bg-color1) !important;
+}
+
+.color__square[style*="background-color:var(--b3-font-background2)"] {
+background-color: var(--diy-bg-color2) !important;
+}
+
+.color__square[style*="background-color:var(--b3-font-background3)"] {
+background-color: var(--diy-bg-color3) !important;
+}
+
+.color__square[style*="background-color:var(--b3-font-background4)"] {
+background-color: var(--diy-bg-color4) !important;
+}
+
+.color__square[style*="background-color:var(--b3-font-background5)"] {
+background-color: var(--diy-bg-color5) !important;
+}
+
+.color__square[style*="background-color:var(--b3-font-background6)"] {
+background-color: var(--diy-bg-color6) !important;
+}
+
+.color__square[style*="background-color:var(--b3-font-background7)"] {
+background-color: var(--diy-bg-color7) !important;
+}
+
+.color__square[style*="background-color:var(--b3-font-background8)"] {
+background-color: var(--diy-bg-color8) !important;
+}
+
+.color__square[style*="background-color:var(--b3-font-background9)"] {
+background-color: var(--diy-bg-color9) !important;
+}
+
+.color__square[style*="background-color:var(--b3-font-background10)"] {
+background-color: var(--diy-bg-color10) !important;
+}
+
+.color__square[style*="background-color:var(--b3-font-background11)"] {
+background-color: var(--diy-bg-color11) !important;
+}
+
+.color__square[style*="background-color:var(--b3-font-background12)"] {
+background-color: var(--diy-bg-color12) !important;
+}
+.color__square[style*="background-color:var(--b3-font-background13)"] {
+background-color: var(--diy-bg-color13) !important;
+}`
 
     async onload() {
             await this.loadConfig();
@@ -138,20 +374,31 @@ class ColorSchemePlugin extends Plugin {
             new Notification({ type: 'error', message: '未找到配色方案' }).show();
             return;
         }
-        const result = [':root {'];
-        for (const k in schemes) {
-            result.push(`--b3-font-${k}: ${schemes[k]};`);
+
+        const lightSchemes = schemes["light"]
+        const darkSchemes = schemes["dark"]
+
+        const result = [':root[data-theme-mode="light"]{'];
+        for (const k in lightSchemes) {
+            result.push(`--diy-${k}: ${lightSchemes[k]};`);
         }
         result.push('}');
+
+        result.push(':root[data-theme-mode="dark"]{');
+        for (const k in darkSchemes) {
+            result.push(`--diy-${k}: ${darkSchemes[k]};`);
+        }
+        result.push('}');
+
         const id = this.config.colorSchemeStyleId;
         let el = document.getElementById(id);
         if (!el) {
             el = document.createElement('style');
             el.id = id;
-            el.innerHTML = result.join('\n');
+            el.innerHTML = result.join('\n')+this.snippetCSS;
             document.head.appendChild(el);
         } else {
-            el.innerHTML = result.join('\n');
+            el.innerHTML = result.join('\n')+this.snippetCSS;
         }
         
         this.config.current = name;
