@@ -344,7 +344,9 @@ background-color: var(--diy-background13) !important;
         element.shadowRoot.innerHTML = `
             <style>
             ${this.pickClassic}
-            
+            .pickrCheck div{
+                border-radius: 4px;
+            }
                     </style>
                     <span class="pickr"></span>
                     <span class="pickrCheck"></span>
