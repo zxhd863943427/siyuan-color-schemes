@@ -1,4 +1,4 @@
-const { Plugin, serverApi, clientApi, Notification } = require('siyuan');
+const { Plugin, serverApi, clientApi, Notification, Menu } = require('siyuan');
 
 const defaultConfig = {
     colorSchemeStyleId: 'color-scheme-plugin',
@@ -10,6 +10,7 @@ const defaultConfig = {
 
 class ColorSchemePlugin extends Plugin {
     config = defaultConfig;
+    schemes = null;
     snippetCSS = `
 /* 请使用在线工具获取颜色HEX色值 */
 
@@ -316,6 +317,7 @@ background-color: var(--diy-background13) !important;
                 const id = that.config.colorSchemeStyleId;
                 let el = document.getElementById(id); 
                 console.log(that.getColor(el,"--diy-"+colorName))
+                console.log(that.schemes)
             }
         })
     }
@@ -388,12 +390,20 @@ background-color: var(--diy-background13) !important;
             this.saveConfig();
             return;
         }
-        const schemes = await this.loadSchemeFromFile(name);
+        let schemes
+        //如果this.schemes不存在，则读取json并初始化 schemes
+        if (this.schemes === null){
+            schemes = await this.loadSchemeFromFile(name);
         if (!schemes) {
             new Notification({ type: 'error', message: '未找到配色方案' }).show();
             return;
         }
-
+        this.schemes = schemes
+        }
+        else{
+            schemes = this.schemes
+        }
+        
         const lightSchemes = schemes["light"]
         const darkSchemes = schemes["dark"]
 
