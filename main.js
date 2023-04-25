@@ -11,6 +11,7 @@ const defaultConfig = {
 class ColorSchemePlugin extends Plugin {
     config = defaultConfig;
     schemes = null;
+    pickr = null;
     snippetCSS = `
 /* 请使用在线工具获取颜色HEX色值 */
 
@@ -254,7 +255,7 @@ background-color: var(--diy-background13) !important;
 `;
 
     async onload() {
-        let pickr = await import("https://esm.sh/v117/@simonwep/pickr@1.8.2/es2022/pickr.mjs")
+        this.pickr = await import("https://esm.sh/v117/@simonwep/pickr@1.8.2/es2022/pickr.mjs")
         await this.loadConfig();
         this.saveConfig();
         this.registerSettingRender((el) => {
@@ -315,15 +316,75 @@ background-color: var(--diy-background13) !important;
                 let colorName = colorStyle.slice(14, -1)
                 console.log(colorName)
                 const id = that.config.colorSchemeStyleId;
-                let el = document.getElementById(id); 
-                console.log(that.getColor(el,"--diy-"+colorName))
+                let el = document.getElementById(id);
+                console.log(that.getColor(el, "--diy-" + colorName))
                 console.log(that.schemes)
+                const menu = document.createElement('div')
+                that.createPickr(menu)
+                new Menu('ColorSchemePlugin').addItem({ element: menu }).showAtMouseEvent(event)
             }
         })
     }
 
     onunload() {
 
+    }
+
+    createPickr(element) {
+        element.attachShadow({ mode: "open" });
+        element.shadowRoot.innerHTML = `
+            <style>
+            ${this.pickClassic}
+            
+                    </style>
+                    <span class="pickr"></span>
+                    <span class="pickrCheck"></span>
+
+            
+            `;
+        let pickrInit = this.pickr.default.create({
+            container: element.shadowRoot.querySelector(".pickrCheck"),
+            el: element.shadowRoot.querySelector(".pickr"),
+            theme: 'monolith', // or 'monolith', or 'nano'
+
+            swatches: [
+                'rgba(244, 67, 54, 1)',
+                'rgba(233, 30, 99, 0.95)',
+                'rgba(156, 39, 176, 0.9)',
+                'rgba(103, 58, 183, 0.85)',
+                'rgba(63, 81, 181, 0.8)',
+                'rgba(33, 150, 243, 0.75)',
+                'rgba(3, 169, 244, 0.7)',
+                'rgba(0, 188, 212, 0.7)',
+                'rgba(0, 150, 136, 0.75)',
+                'rgba(76, 175, 80, 0.8)',
+                'rgba(139, 195, 74, 0.85)',
+                'rgba(205, 220, 57, 0.9)',
+                'rgba(255, 235, 59, 0.95)',
+                'rgba(255, 193, 7, 1)'
+            ],
+
+            components: {
+
+                // Main components
+                preview: true,
+                opacity: true,
+                hue: true,
+
+                // Input / output Options
+                interaction: {
+                    hex: true,
+                    rgba: true,
+                    hsla: true,
+                    hsva: true,
+                    cmyk: true,
+                    input: true,
+                    clear: true,
+                    save: true
+                }
+            }
+        });
+        return pickrInit;
     }
 
     async loadConfig() {
@@ -392,18 +453,18 @@ background-color: var(--diy-background13) !important;
         }
         let schemes
         //如果this.schemes不存在，则读取json并初始化 schemes
-        if (this.schemes === null){
+        if (this.schemes === null) {
             schemes = await this.loadSchemeFromFile(name);
-        if (!schemes) {
-            new Notification({ type: 'error', message: '未找到配色方案' }).show();
-            return;
+            if (!schemes) {
+                new Notification({ type: 'error', message: '未找到配色方案' }).show();
+                return;
+            }
+            this.schemes = schemes
         }
-        this.schemes = schemes
-        }
-        else{
+        else {
             schemes = this.schemes
         }
-        
+
         const lightSchemes = schemes["light"]
         const darkSchemes = schemes["dark"]
 
