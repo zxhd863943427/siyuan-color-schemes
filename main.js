@@ -312,15 +312,21 @@ background-color: var(--diy-background13) !important;
             var target = event.target;
             if (target.className === "color__square") {
                 console.log("yanse")
+                // 确定字体颜色还是背景
                 let colorStyle = target.style.color === "" ? target.style.backgroundColor : target.style.color
                 let colorName = colorStyle.slice(14, -1)
+
+
                 console.log(colorName)
                 const id = that.config.colorSchemeStyleId;
                 let el = document.getElementById(id);
                 console.log(that.getColor(el, "--diy-" + colorName))
                 console.log(that.schemes)
+
+                
+                // 创建调色盘
                 const menu = document.createElement('div')
-                that.createPickr(menu)
+                that.createPickr(menu,colorName)
                 new Menu('ColorSchemePlugin').addItem({ element: menu }).showAtMouseEvent(event)
             }
         })
@@ -330,7 +336,10 @@ background-color: var(--diy-background13) !important;
 
     }
 
-    createPickr(element) {
+    createPickr(element,colorName) {
+        const id = this.config.colorSchemeStyleId;
+        let el = document.getElementById(id);
+        let currentColor = this.getColor(el, "--diy-" + colorName)
         element.attachShadow({ mode: "open" });
         element.shadowRoot.innerHTML = `
             <style>
@@ -346,7 +355,7 @@ background-color: var(--diy-background13) !important;
             container: element.shadowRoot.querySelector(".pickrCheck"),
             el: element.shadowRoot.querySelector(".pickr"),
             theme: 'monolith', // or 'monolith', or 'nano'
-
+            default:currentColor,
             swatches: [
                 'rgba(244, 67, 54, 1)',
                 'rgba(233, 30, 99, 0.95)',
