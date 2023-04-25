@@ -307,12 +307,11 @@ background-color: var(--diy-background13) !important;
         });
         document.addEventListener("contextmenu", function (event) {
             var target = event.target;
-            switch (target.className) {
-                case "color__square":
-                    console.log("yanse")
-                    let colorStyle = target.style.color === "" ? target.style.backgroundColor : target.style.color
-                    let colorName = colorStyle.slice(14,-1)
-                    console.log(colorName)
+            if (target.className === "color__square") {
+                console.log("yanse")
+                let colorStyle = target.style.color === "" ? target.style.backgroundColor : target.style.color
+                let colorName = colorStyle.slice(14, -1)
+                console.log(colorName)
             }
         })
     }
