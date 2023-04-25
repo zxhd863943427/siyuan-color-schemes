@@ -323,10 +323,10 @@ background-color: var(--diy-background13) !important;
                 console.log(that.getColor(el, "--diy-" + colorName))
                 console.log(that.schemes)
 
-                
+
                 // 创建调色盘
                 const menu = document.createElement('div')
-                that.createPickr(menu,colorName)
+                that.createPickr(menu, colorName)
                 new Menu('ColorSchemePlugin').addItem({ element: menu }).showAtMouseEvent(event)
             }
         })
@@ -336,7 +336,7 @@ background-color: var(--diy-background13) !important;
 
     }
 
-    createPickr(element,colorName) {
+    createPickr(element, colorName) {
         const id = this.config.colorSchemeStyleId;
         let el = document.getElementById(id);
         let currentColor = this.getColor(el, "--diy-" + colorName)
@@ -355,7 +355,7 @@ background-color: var(--diy-background13) !important;
             container: element.shadowRoot.querySelector(".pickrCheck"),
             el: element.shadowRoot.querySelector(".pickr"),
             theme: 'monolith', // or 'monolith', or 'nano'
-            default:currentColor,
+            default: currentColor,
             swatches: [
                 'rgba(244, 67, 54, 1)',
                 'rgba(233, 30, 99, 0.95)',
@@ -392,6 +392,14 @@ background-color: var(--diy-background13) !important;
                     save: true
                 }
             }
+        });
+        let that = this;
+        pickrInit.on("save", (color) => {
+            let colorValue = color ? color.toHEXA() : "";
+            console.log(color)
+            console.log(colorValue)
+            window.tempColor = color
+            that.setColor(el, "--diy-" + colorName,colorValue)
         });
         return pickrInit;
     }
@@ -519,9 +527,8 @@ background-color: var(--diy-background13) !important;
     getColor(element, name) {
         let mode = document.querySelector("html").getAttribute("data-theme-mode")
         console.log(element.sheet)
-        let rootRuleLight
-        let rootRuleDark
-            = element.sheet.cssRules
+        let rootRuleLight;
+        let rootRuleDark;
         for (let i = 0; i < element.sheet.cssRules.length; i++) {
             if (element.sheet.cssRules[i].selectorText === ":root[data-theme-mode=\"light\"]") {
                 rootRuleLight = element.sheet.cssRules[i];
@@ -542,6 +549,30 @@ background-color: var(--diy-background13) !important;
                 break;
         }
         return namedColor
+    }
+
+    setColor(element, name, value) {
+        let mode = document.querySelector("html").getAttribute("data-theme-mode")
+        console.log(element.sheet)
+        let rootRuleLight;
+        let rootRuleDark;
+        for (let i = 0; i < element.sheet.cssRules.length; i++) {
+            if (element.sheet.cssRules[i].selectorText === ":root[data-theme-mode=\"light\"]") {
+                rootRuleLight = element.sheet.cssRules[i];
+            }
+            if (element.sheet.cssRules[i].selectorText === ":root[data-theme-mode=\"dark\"]") {
+                rootRuleDark = element.sheet.cssRules[i];
+            }
+        }
+        switch (mode) {
+            case 'light':
+                rootRuleLight.style.setProperty(name,value);
+                break;
+            case 'dark':
+                rootRuleDark.style.setProperty(name,value);
+                break;
+        }
+        return
     }
 }
 
