@@ -305,6 +305,7 @@ background-color: var(--diy-background13) !important;
                 select.innerHTML = newOptionsHTML;
             });
         });
+        let that = this
         document.addEventListener("contextmenu", function (event) {
             var target = event.target;
             if (target.className === "color__square") {
@@ -312,6 +313,9 @@ background-color: var(--diy-background13) !important;
                 let colorStyle = target.style.color === "" ? target.style.backgroundColor : target.style.color
                 let colorName = colorStyle.slice(14, -1)
                 console.log(colorName)
+                const id = that.config.colorSchemeStyleId;
+                let el = document.getElementById(id); 
+                console.log(that.getColor(el,"--diy-"+colorName))
             }
         })
     }
