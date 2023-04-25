@@ -143,108 +143,108 @@ background-color: var(--diy-color13) !important;
 
 /* 针对不同底色，修改其底色 */
 [style*="background-color: var(--b3-font-background1);"] {
-background-color: var(--diy-bg-color1) !important;
+background-color: var(--diy-background1) !important;
 }
 
 [style*="background-color: var(--b3-font-background2);"] {
-background-color: var(--diy-bg-color2) !important;
+background-color: var(--diy-background2) !important;
 }
 
 [style*="background-color: var(--b3-font-background3);"] {
-background-color: var(--diy-bg-color3) !important;
+background-color: var(--diy-background3) !important;
 }
 
 [style*="background-color: var(--b3-font-background4);"] {
-background-color: var(--diy-bg-color4) !important;
+background-color: var(--diy-background4) !important;
 }
 
 [style*="background-color: var(--b3-font-background5);"] {
-background-color: var(--diy-bg-color5) !important;
+background-color: var(--diy-background5) !important;
 }
 
 [style*="background-color: var(--b3-font-background6);"] {
-background-color: var(--diy-bg-color6) !important;
+background-color: var(--diy-background6) !important;
 }
 
 [style*="background-color: var(--b3-font-background7);"] {
-background-color: var(--diy-bg-color7) !important;
+background-color: var(--diy-background7) !important;
 }
 
 [style*="background-color: var(--b3-font-background8);"] {
-background-color: var(--diy-bg-color8) !important;
+background-color: var(--diy-background8) !important;
 }
 
 [style*="background-color: var(--b3-font-background9);"] {
-background-color: var(--diy-bg-color9) !important;
+background-color: var(--diy-background9) !important;
 }
 
 [style*="background-color: var(--b3-font-background10);"] {
-background-color: var(--diy-bg-color10) !important;
+background-color: var(--diy-background10) !important;
 }
 
 [style*="background-color: var(--b3-font-background11);"] {
-background-color: var(--diy-bg-color11) !important;
+background-color: var(--diy-background11) !important;
 }
 
 [style*="background-color: var(--b3-font-background12);"] {
-background-color: var(--diy-bg-color12) !important;
+background-color: var(--diy-background12) !important;
 }
 
 [style*="background-color: var(--b3-font-background13);"] {
-background-color: var(--diy-bg-color13) !important;
+background-color: var(--diy-background13) !important;
 
 }
 
 
 .color__square[style*="background-color:var(--b3-font-background1)"] {
-background-color: var(--diy-bg-color1) !important;
+background-color: var(--diy-background1) !important;
 }
 
 .color__square[style*="background-color:var(--b3-font-background2)"] {
-background-color: var(--diy-bg-color2) !important;
+background-color: var(--diy-background2) !important;
 }
 
 .color__square[style*="background-color:var(--b3-font-background3)"] {
-background-color: var(--diy-bg-color3) !important;
+background-color: var(--diy-background3) !important;
 }
 
 .color__square[style*="background-color:var(--b3-font-background4)"] {
-background-color: var(--diy-bg-color4) !important;
+background-color: var(--diy-background4) !important;
 }
 
 .color__square[style*="background-color:var(--b3-font-background5)"] {
-background-color: var(--diy-bg-color5) !important;
+background-color: var(--diy-background5) !important;
 }
 
 .color__square[style*="background-color:var(--b3-font-background6)"] {
-background-color: var(--diy-bg-color6) !important;
+background-color: var(--diy-background6) !important;
 }
 
 .color__square[style*="background-color:var(--b3-font-background7)"] {
-background-color: var(--diy-bg-color7) !important;
+background-color: var(--diy-background7) !important;
 }
 
 .color__square[style*="background-color:var(--b3-font-background8)"] {
-background-color: var(--diy-bg-color8) !important;
+background-color: var(--diy-background8) !important;
 }
 
 .color__square[style*="background-color:var(--b3-font-background9)"] {
-background-color: var(--diy-bg-color9) !important;
+background-color: var(--diy-background9) !important;
 }
 
 .color__square[style*="background-color:var(--b3-font-background10)"] {
-background-color: var(--diy-bg-color10) !important;
+background-color: var(--diy-background10) !important;
 }
 
 .color__square[style*="background-color:var(--b3-font-background11)"] {
-background-color: var(--diy-bg-color11) !important;
+background-color: var(--diy-background11) !important;
 }
 
 .color__square[style*="background-color:var(--b3-font-background12)"] {
-background-color: var(--diy-bg-color12) !important;
+background-color: var(--diy-background12) !important;
 }
 .color__square[style*="background-color:var(--b3-font-background13)"] {
-background-color: var(--diy-bg-color13) !important;
+background-color: var(--diy-background13) !important;
 }`
     pickClassic = `
     /*! Pickr 1.8.2 MIT | https://github.com/Simonwep/pickr */
@@ -305,6 +305,16 @@ background-color: var(--diy-bg-color13) !important;
                 select.innerHTML = newOptionsHTML;
             });
         });
+        document.addEventListener("contextmenu", function (event) {
+            var target = event.target;
+            switch (target.className) {
+                case "color__square":
+                    console.log("yanse")
+                    let colorStyle = target.style.color === "" ? target.style.backgroundColor : target.style.color
+                    let colorName = colorStyle.slice(14,-1)
+                    console.log(colorName)
+            }
+        })
     }
 
     onunload() {
@@ -422,6 +432,33 @@ background-color: var(--diy-bg-color13) !important;
             new Notification({ type: 'error', message: '配色方案解析错误' }).show();
             return null;
         }
+    }
+    getColor(element, name) {
+        let mode = document.querySelector("html").getAttribute("data-theme-mode")
+        console.log(element.sheet)
+        let rootRuleLight
+        let rootRuleDark
+            = element.sheet.cssRules
+        for (let i = 0; i < element.sheet.cssRules.length; i++) {
+            if (element.sheet.cssRules[i].selectorText === ":root[data-theme-mode=\"light\"]") {
+                rootRuleLight = element.sheet.cssRules[i];
+            }
+            if (element.sheet.cssRules[i].selectorText === ":root[data-theme-mode=\"dark\"]") {
+                rootRuleDark = element.sheet.cssRules[i];
+            }
+        }
+        let namedColor;
+        switch (mode) {
+            case 'light':
+                namedColor = rootRuleLight.style.getPropertyValue(name);
+                namedColor = namedColor ? namedColor.trim() : null;
+                break;
+            case 'dark':
+                namedColor = rootRuleDark.style.getPropertyValue(name);
+                namedColor = namedColor ? namedColor.trim() : null;
+                break;
+        }
+        return namedColor
     }
 }
 
