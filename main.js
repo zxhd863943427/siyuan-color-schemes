@@ -399,7 +399,9 @@ background-color: var(--diy-background13) !important;
             console.log(color)
             console.log(colorValue)
             window.tempColor = color
-            that.setColor(el, "--diy-" + colorName,colorValue)
+            that.setColor(el, colorName, colorValue)
+            console.log(that.schemes)
+            that.saveScheme(that.config.current, that.schemes)
         });
         return pickrInit;
     }
@@ -552,6 +554,7 @@ background-color: var(--diy-background13) !important;
     }
 
     setColor(element, name, value) {
+        value = value.toString();
         let mode = document.querySelector("html").getAttribute("data-theme-mode")
         console.log(element.sheet)
         let rootRuleLight;
@@ -566,10 +569,12 @@ background-color: var(--diy-background13) !important;
         }
         switch (mode) {
             case 'light':
-                rootRuleLight.style.setProperty(name,value);
+                rootRuleLight.style.setProperty("--diy-" + name, value);
+                this.schemes['light'][name] = value;
                 break;
             case 'dark':
-                rootRuleDark.style.setProperty(name,value);
+                rootRuleDark.style.setProperty("--diy-" + name, value);
+                this.schemes['dary'][name] = value;
                 break;
         }
         return
