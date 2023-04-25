@@ -391,7 +391,11 @@ background-color: var(--diy-background13) !important;
     }
 
     onunload() {
-
+        const id = this.config.colorSchemeStyleId;
+        let el = document.getElementById(id);
+        if (el) {
+            el.remove();
+        }
     }
 
     createPickr(element, colorName) {
