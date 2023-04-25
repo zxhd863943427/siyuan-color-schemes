@@ -253,12 +253,12 @@ background-color: var(--diy-bg-color13) !important;
 `;
 
     async onload() {
-            let pickr = await import("https://esm.sh/v117/@simonwep/pickr@1.8.2/es2022/pickr.mjs")
-            await this.loadConfig();
-            this.saveConfig();
-            this.registerSettingRender((el) => {
-                        const options = Object.keys(this.config.colorSchemes);
-                        el.innerHTML = `
+        let pickr = await import("https://esm.sh/v117/@simonwep/pickr@1.8.2/es2022/pickr.mjs")
+        await this.loadConfig();
+        this.saveConfig();
+        this.registerSettingRender((el) => {
+            const options = Object.keys(this.config.colorSchemes);
+            el.innerHTML = `
             <div class="config__tab-container" data-name="common" style="height: unset !important;">
                 <label class="fn__flex b3-label config__item">
                     <div class="fn__flex-1">
@@ -284,7 +284,7 @@ background-color: var(--diy-bg-color13) !important;
             </div>
             `;
             const uploadButton = el.querySelector('#color-schemes-upload-button');
-            
+
             const select = el.querySelector('#color-schemes-current');
             select.value = this.config.current;
             select.addEventListener('change', (e) => {
@@ -401,12 +401,12 @@ background-color: var(--diy-bg-color13) !important;
         if (!el) {
             el = document.createElement('style');
             el.id = id;
-            el.innerHTML = result.join('\n')+this.snippetCSS;
+            el.innerHTML = result.join('\n') + this.snippetCSS;
             document.head.appendChild(el);
         } else {
-            el.innerHTML = result.join('\n')+this.snippetCSS;
+            el.innerHTML = result.join('\n') + this.snippetCSS;
         }
-        
+
         this.config.current = name;
         this.saveConfig();
     }
