@@ -452,7 +452,7 @@ background-color: var(--diy-background13) !important;
                     hsva: true,
                     cmyk: true,
                     input: true,
-                    clear: true,
+                    clear: false,
                     save: true
                 }
             }
